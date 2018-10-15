@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Repositories" />
+    <Folder Include="Services" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Abstractions\**" />
+    <Compile Remove="Entities\**" />
+    <Compile Remove="UseCases\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Abstractions\**" />
+    <EmbeddedResource Remove="Entities\**" />
+    <EmbeddedResource Remove="UseCases\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Abstractions\**" />
+    <None Remove="Entities\**" />
+    <None Remove="UseCases\**" />
+  </ItemGroup>
+</Project>
