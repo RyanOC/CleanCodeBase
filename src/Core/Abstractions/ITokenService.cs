@@ -1,7 +1,10 @@
-﻿namespace Core.Abstractions
+﻿using System.Threading.Tasks;
+using Core.Entities;
+
+namespace Core.Abstractions
 {
-    public class ITokenService
+    public interface ITokenService
     {
-        
+        Task<string> AuthenticateAsync(LoginCredentials loginCredentials);
     }
 }
