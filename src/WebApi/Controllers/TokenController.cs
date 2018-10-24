@@ -23,7 +23,6 @@ namespace WebApi.Controllers
             if (request.UserName == string.Empty || request.Password == string.Empty)
             {
                 return Forbid("Login Failed");
-                //return StatusCode((int)HttpStatusCode.Forbidden,"Login Failed");
             }
             
             return Ok(await _tokenService.AuthenticateAsync(request));

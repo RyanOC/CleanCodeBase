@@ -4,7 +4,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Repositories" />
-    <Folder Include="Services" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Abstractions\**" />
@@ -20,5 +19,8 @@
     <None Remove="Abstractions\**" />
     <None Remove="Entities\**" />
     <None Remove="UseCases\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Core.Abstractions;
 using Core.Entities;
 
@@ -7,13 +6,16 @@ namespace Core.Services
 {
     public class TokenService: ITokenService
     {
-        public async Task<string> AuthenticateAsync(LoginCredentials loginCredentials)
+        private readonly IIdentityService _identityService ;
+
+        public TokenService(IIdentityService identityService)
         {
-            //var idProvider = Task.Delay(2000);       
-            //await idProvider;            
-            //return true;       
-            Thread.Sleep(1000); //just to simulate an http call delay
-            return await Task.Run(() => "thisisatesttokenthatisnotvalid"); //hardcode token for now
+            _identityService  = identityService ;
+        }
+        
+        public async Task<string> AuthenticateAsync(LoginCredentials loginCredentials)
+        { 
+            return await _identityService .AuthenticateAsync(loginCredentials);
         }
     }
 }
