@@ -11,4 +11,9 @@
       <Version>4.6.48</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
