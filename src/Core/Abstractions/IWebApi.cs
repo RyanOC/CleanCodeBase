@@ -8,6 +8,6 @@ namespace Core.Abstractions
     public interface IWebApi
     {
         [Get("/api/v1/customers")]
-        Task<IList<Customer>> GetCustomers();
+        Task<IList<Customer>> GetCustomers([Header("Authorization")] string authorization);
     }
 }

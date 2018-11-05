@@ -9,7 +9,7 @@ namespace WebApi.Controllers
     public class CustomerController : Controller
     {
         [Route("api/v1/customers")]
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         public ActionResult<IList<Customer>> Get()
         {
