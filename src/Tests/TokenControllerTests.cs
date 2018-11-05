@@ -24,7 +24,7 @@ namespace Tests
         {
             // Arange
             _mockService.Setup(svc => svc.AuthenticateAsync(It.IsAny<LoginCredentials>())).ReturnsAsync("FakeTokenString");
-            TokenController controller = new TokenController(_mockService.Object);
+            TokenController controller = new TokenController(null, _mockService.Object);
 
             // Act
             var response = controller.Post(new LoginCredentials { UserName = "user@domain.com", Password = "password"}).Result;
@@ -41,7 +41,7 @@ namespace Tests
         {
             // Arange
             _mockService.Setup(svc => svc.AuthenticateAsync(It.IsAny<LoginCredentials>())).ReturnsAsync("FakeTokenString");
-            TokenController controller = new TokenController(_mockService.Object);
+            TokenController controller = new TokenController(null, _mockService.Object);
 
             // Act
             var response = controller.Post(new LoginCredentials { UserName = "", Password = ""}).Result;

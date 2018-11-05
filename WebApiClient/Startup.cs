@@ -24,12 +24,15 @@ namespace WebApiClient
         {
 
             services.AddRefitClient<IWebApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://127.0.0.1:5002"))
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri(Configuration["WebApi"]))
                 .AddTransientHttpErrorPolicy(p => p.RetryAsync(6));
             // Add additional IHttpClientBuilder chained methods as required here:
             //.AddHttpMessageHandler<MyHandler>();
             //.SetHandlerLifetime(TimeSpan.FromMinutes(2));
+            // more... https://github.com/App-vNext/Polly.Extensions.Http
 
+            services.AddSingleton(Configuration);
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
