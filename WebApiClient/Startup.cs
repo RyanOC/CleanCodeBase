@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Core.Abstractions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Refit;
+using Polly;
 
 namespace WebApiClient
 {
@@ -25,6 +22,14 @@ namespace WebApiClient
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddRefitClient<IWebApi>()
+                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://127.0.0.1:5002"))
+                .AddTransientHttpErrorPolicy(p => p.RetryAsync(6));
+            // Add additional IHttpClientBuilder chained methods as required here:
+            //.AddHttpMessageHandler<MyHandler>();
+            //.SetHandlerLifetime(TimeSpan.FromMinutes(2));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

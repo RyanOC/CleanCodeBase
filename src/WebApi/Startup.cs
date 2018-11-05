@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Text;
+using System.Threading.Tasks;
 using Core.Abstractions;
 using Core.Services;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -71,9 +73,33 @@ namespace WebApi
             }
 
             app.UseAuthentication();
+            
+            app.UseMiddleware<RandomFailureMiddleware>(); 
 
             app.UseHttpsRedirection();
             app.UseMvc();
+        }
+
+        private class RandomFailureMiddleware
+        {
+            private readonly RequestDelegate _next;
+            private readonly Random _rand;
+
+            public RandomFailureMiddleware(RequestDelegate next)
+            {
+                _next = next;
+                _rand = new Random();
+            }
+
+            public Task Invoke(HttpContext httpContext)
+            {
+                if (_rand.NextDouble() >= 0.5)
+                {
+                    throw new Exception("Computer says no.");
+                }           
+
+                return _next(httpContext);
+            }
         }
     }   
 }
