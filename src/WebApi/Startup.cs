@@ -95,7 +95,7 @@ namespace WebApi
             {
                 if (_rand.NextDouble() >= 0.5)
                 {
-                    throw new Exception("Computer says no.");
+                    //throw new Exception("Computer says no.");
                 }           
 
                 return _next(httpContext);
